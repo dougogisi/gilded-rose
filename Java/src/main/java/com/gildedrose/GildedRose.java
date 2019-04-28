@@ -16,12 +16,7 @@ class GildedRose {
        * create a concept of effects and a state manager to takes those effects and apply them to items
        * Effects are functions that implement the EffectInterface interface
        */
-      itemStateManager.addStateEffect(ItemEffects.agedBrieQualityEffect(items[i]));
-      itemStateManager.addStateEffect(ItemEffects.sulfurasQualityEffect(items[i]));
-      itemStateManager.addStateEffect(ItemEffects.backStageQualityEffect(items[i]));
-      itemStateManager.addStateEffect(ItemEffects.conjuredQualityEffect(items[i]));
-      itemStateManager.addStateEffect(ItemEffects.defaultQualityEffect(items[i]));
-      itemStateManager.addStateEffect(ItemEffects.sellInEffect(items[i]));
+      itemStateManager.addStateEffect(ItemEffects.getEffectByItem(items[i]));
       items[i] = itemStateManager.getNext();
     }
   }

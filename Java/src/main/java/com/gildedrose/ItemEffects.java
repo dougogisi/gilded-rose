@@ -24,19 +24,26 @@ public class ItemEffects {
    * @param prev Item.
    * @return EffectInterface.
    */
-  public static EffectInterface sellInEffect(Item prev) {
-    EffectInterface sellInEffectFunc = (item) -> {
-      String sanitizedName = prev.name.replaceAll("\\s+", "").toLowerCase();
-      Item next = cloneItem(item);
+  public static EffectInterface getEffectByItem(Item item) {
+    String sanitizedName = item.name.replaceAll("\\s+", "").toLowerCase();
 
-      if (!sanitizedName.startsWith("sulfuras")) {
-        next.sellIn = next.sellIn - 1;
-      }
-      
-      return next;
-    };
+    if (sanitizedName.startsWith("agedbrie")) {
+      return agedBrieQualityEffect(item);
+    }
 
-    return sellInEffectFunc;
+    if (sanitizedName.startsWith("backstagepasses")) {
+      return backStageQualityEffect(item);
+    }
+
+    if (sanitizedName.startsWith("conjured")) {
+      return conjuredQualityEffect(item);
+    }
+
+    if (sanitizedName.startsWith("sulfuras")) {
+      return sulfurasQualityEffect(item);
+    }
+
+    return defaultQualityEffect(item);
   }
 
   /**
@@ -51,6 +58,7 @@ public class ItemEffects {
 
       if (sanitizedName.startsWith("agedbrie")) {
         next.quality = next.quality + quality_modifier > 50 ? 50 : next.quality + quality_modifier;
+        next.sellIn = next.sellIn - 1;
       }
       
       return next;
@@ -86,6 +94,7 @@ public class ItemEffects {
         }
 
         next.quality = next.quality + quality_modifier > 50 ? 50 : next.quality + quality_modifier;
+        next.sellIn = next.sellIn - 1;
 
         if (next.sellIn < 0) {
           next.quality = 0;
@@ -112,6 +121,7 @@ public class ItemEffects {
         quality_modifier = next.sellIn <= 0 ? quality_modifier * 4 : quality_modifier * 2;
         next.quality = next.quality - quality_modifier;
         next.quality = Math.max(0, next.quality);
+        next.sellIn = next.sellIn - 1;
       }
       
       return next;
@@ -134,6 +144,7 @@ public class ItemEffects {
         quality_modifier = next.sellIn <= 0 ? quality_modifier * 2 : quality_modifier;
         next.quality = next.quality - quality_modifier;
         next.quality = Math.max(0, next.quality);
+        next.sellIn = next.sellIn - 1;
       }
       
       return next;
