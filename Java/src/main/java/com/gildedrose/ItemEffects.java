@@ -6,11 +6,6 @@ interface EffectInterface {
 }
 
 public class ItemEffects {
-  final static String TYPE_NECROMANTIC = "necromantic";
-  final static String TYPE_LEGENDARY = "legendary";
-  final static String TYPE_CONJURED = "conjured";
-  final static String TYPE_CONCERT = "concert";
-  final static String TYPE_DEFAULT = "default";
 
   /**
    * @param prev Item.
